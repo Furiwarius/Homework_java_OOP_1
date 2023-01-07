@@ -1,7 +1,14 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Human {
+    // счетчик людей
+    private static int count = 0;
+    private static HashMap<Integer,Human> humans = new HashMap<>();
+
+    // личный идентификатор человека
+    private int id;
     //состояние человека
     private State state;
     
@@ -38,6 +45,9 @@ public class Human {
         this.birthdayDate = new Date(birthday, monthOfBirth, yearOfBirth);
 
         this.state = State.alive;
+        count++;
+        id=count;
+        humans.put(id, this);
     }
 
 
@@ -220,6 +230,27 @@ public class Human {
 
     public void addGrandparents(Human grantparent) {
         grandparents.add(grantparent);
+    }
+
+
+    public static int getCountHumans() {
+        return humans.size();
+    }
+
+
+    public static ArrayList<Integer> getIdList() {
+        ArrayList<Integer> result = new ArrayList<>(humans.keySet());
+        return result;
+    }
+
+
+    public static Human getHuman(int id) {
+        return humans.get(id);
+    }
+
+
+    public int getId() {
+        return id;
     }
 
 
