@@ -14,6 +14,7 @@ public class Human {
     
     private Date birthdayDate;
     private Date deathDayDate;
+    private int age;
 
     private String name;
     private String surname;
@@ -118,6 +119,7 @@ public class Human {
         }
 
         this.state = State.dead;
+        this.age = deathDayDate.getYear()-birthdayDate.getYear();
     }
 
 
@@ -266,6 +268,16 @@ public class Human {
 
     public Gender getGender() {
         return gender;
+    }
+
+
+    public int getAge() {
+        if (this.state==State.alive) {
+            LocalDateTime dateNow = LocalDateTime.now();
+            return dateNow.getYear()-this.birthdayDate.getYear();
+        } else {
+            return age;
+        }
     }
 
 

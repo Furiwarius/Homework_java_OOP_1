@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Family {
+public class Family implements Iterator<Human>{
     private ArrayList<Human> humans = new ArrayList<>();
+
+    private int indexHumans = 0;
 
     public Family(Human human){
         addHuman(human);
@@ -122,4 +125,24 @@ public class Family {
             }
         }
     }
+
+
+    public ArrayList<Human> sortByAge() {
+        ArrayList<Human> result = humans;
+        result.sort(new AgeComporator());
+        return result;
+    }
+
+
+    @Override
+    public boolean hasNext() {
+        return indexHumans++<humans.size();
+    }
+
+
+    @Override
+    public Human next() {
+        return humans.get(indexHumans);
+    }
+
 }
